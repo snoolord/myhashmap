@@ -9,10 +9,13 @@ class Link
     @next = nil
     @prev = nil
   end
-
-  def inspect
-    puts "key: #{@key} val: #{@val}"
-  end
+  #
+  # def inspect
+  #   puts "key: #{@key} val: #{@val}"
+  #   puts "prev/next #{@prev} / #{@next}"
+  #   puts "next.key/next.val #{@next.key} / #{@next.val}"
+  #   puts "********************************************"
+  # end
 end
 
 class LinkedList
@@ -82,16 +85,17 @@ class LinkedList
   end
 
   def find(key)
+    return nil if empty?
     current_node = @sentinel
-
     while true
-      return current_node if current_node.key == key
       current_node = current_node.next
+      return current_node if current_node.key == key
       return nil if current_node == @sentinel
     end
   end
 
   def each(&prc)
+    return nil if empty?
     current_node = first
     until current_node == @sentinel
       prc.call(current_node)
